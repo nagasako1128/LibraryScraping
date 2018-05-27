@@ -43,7 +43,7 @@ line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
 
-@app.route("/callback", methods=['POST'])
+@app.route("/callback", methods=['GET'])
 def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
