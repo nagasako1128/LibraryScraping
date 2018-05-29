@@ -47,14 +47,15 @@ def callback():
         driver.find_element_by_css_selector('input#title.iw20').send_keys(body)
         driver.find_element_by_css_selector("div.page_content_frame_control button").click()
         posts = driver.find_elements_by_css_selector("table#sheet tr td") #ページ内のタイトル複数
-        name = []   #初期化
+        name_list = []   #初期化
         for post in posts:
             try:
-                name.append(post.text)
+                name_list.append(post.text)
             except Exception as e:
                 print(e)
-        if not name:
-            handler.handle(name, signature)
+        if not name_list:
+            strname = ','.join(name_list)
+            handler.handle(strname, signature)
         else:
             handler.handle(body, signature)
     except InvalidSignatureError:
