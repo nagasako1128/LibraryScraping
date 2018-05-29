@@ -54,6 +54,8 @@ def callback():
                 name_list.append(post.text)
             except Exception as e:
                 print(e)
+        print("name_list:")
+        print(name_list)
         if not name_list:
             handler.handle('NG:' + body, signature)
         else:
