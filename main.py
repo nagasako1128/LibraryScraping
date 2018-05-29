@@ -44,7 +44,8 @@ def callback():
     # handle webhook body
     try:
         driver.get(url)
-        driver.find_element_by_css_selector('input#title.iw20').send_keys("孤狼の血")
+#         driver.find_element_by_css_selector('input#title.iw20').send_keys("孤狼の血")
+        driver.find_element_by_css_selector('input#title.iw20').send_keys(body)
         driver.find_element_by_css_selector("div.page_content_frame_control button").click()
         posts = driver.find_elements_by_css_selector("table#sheet tr td") #ページ内のタイトル複数
         name = []   #初期化
