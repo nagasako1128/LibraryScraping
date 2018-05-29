@@ -1,4 +1,6 @@
 from flask import Flask, request, abort
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -21,6 +23,15 @@ YOUR_CHANNEL_SECRET = os.environ["LINE_CHANNEL_SECRET"]
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
+options = Options()
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-gpu')
+options.add_argument('--window-size=1280,1024')
+driver = webdriver.Chrome(chrome_options=options)
+
+url = "https://www.lib100.nexs-service.jp/etajima/webopac/selectsearch.do?searchkbn=2&histnum=1"
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -32,7 +43,19 @@ def callback():
 
     # handle webhook body
     try:
-        handler.handle(body, signature)
+        driver.get(url)
+        driver.find_element_by_css_selector('input#title.iw20').send_keys("孤狼の血")
+        driver.find_element_by_css_selector("div.page_content_frame_control button").click()
+        posts = driver.find_elements_by_css_selector("table#sheet tr td") #ページ内のタイトル複数
+        name = []   #初期化
+        for post in posts:
+          try:
+              name.append(post.text)
+          except Exception as e:
+              print(e)
+        if not name:
+#           print(name)
+        handler.handle(body+name, signature)
     except InvalidSignatureError:
         abort(400)
 
