@@ -24,10 +24,9 @@ line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 options = Options()
+options.binary_location = '/app/.apt/usr/bin/google-chrome'
 options.add_argument('--headless')
-options.add_argument('--no-sandbox')
 options.add_argument('--disable-gpu')
-options.add_argument('--window-size=1280,1024')
 driver = webdriver.Chrome(chrome_options=options)
 
 url = "https://www.lib100.nexs-service.jp/etajima/webopac/selectsearch.do?searchkbn=2&histnum=1"
