@@ -49,12 +49,11 @@ def callback():
         posts = driver.find_elements_by_css_selector("table#sheet tr td") #ページ内のタイトル複数
         name = []   #初期化
         for post in posts:
-          try:
-              name.append(post.text)
-          except Exception as e:
-              print(e)
+            try:
+                name.append(post.text)
+            except Exception as e:
+                print(e)
         if not name:
-#           print(name)
             handler.handle(name, signature)
         else:
             handler.handle(body, signature)
