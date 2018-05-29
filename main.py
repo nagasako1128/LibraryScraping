@@ -55,7 +55,9 @@ def callback():
               print(e)
         if not name:
 #           print(name)
-        handler.handle(body+name, signature)
+            handler.handle(name, signature)
+        else:
+            handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
 
