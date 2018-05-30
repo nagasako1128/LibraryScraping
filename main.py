@@ -48,7 +48,7 @@ def callback():
         driver.get(url)
         print(driver)
 #         driver.find_element_by_css_selector('input#title.iw20').send_keys("孤狼の血")
-        driver.find_element_by_css_selector('input#title.iw20').send_keys(body['events']['message']['text'])
+        driver.find_element_by_css_selector('input#title.iw20').send_keys(body['events'][0]['message']['text'])
         print(driver)
         driver.find_element_by_css_selector("div.page_content_frame_control button").click()
         print(driver)
@@ -66,7 +66,7 @@ def callback():
             handler.handle(body, signature)
         else:
             strname = ','.join(name_list)
-            body['events']['message']['text'] = strname
+            body['events'][0]['message']['text'] = strname
             handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
