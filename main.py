@@ -25,7 +25,7 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 options = Options()
 options.binary_location = '/app/.apt/usr/bin/google-chrome'
-# options.add_argument('--headless')
+options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-gpu')
 options.add_argument('--window-size=1280,1024')
@@ -33,10 +33,10 @@ driver = webdriver.Chrome(chrome_options=options)
 
 url = "https://www.lib100.nexs-service.jp/etajima/webopac/selectsearch.do?searchkbn=2&histnum=1"
 
-@app.route("/callback", methods=['GET'])
+@app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
-#     signature = request.headers['X-Line-Signature']
+    signature = request.headers['X-Line-Signature']
 
     # get request body as text
     body = request.get_data(as_text=True)
@@ -47,8 +47,8 @@ def callback():
     try:
         driver.get(url)
         print(driver)
-#         driver.find_element_by_css_selector('input#title.iw20').send_keys("孤狼の血")
-        driver.find_element_by_css_selector('input#title.iw20').send_keys(body)
+        driver.find_element_by_css_selector('input#title.iw20').send_keys("孤狼の血")
+#         driver.find_element_by_css_selector('input#title.iw20').send_keys(body)
         print(driver)
         driver.find_element_by_css_selector("div.page_content_frame_control button").click()
         print(driver)
@@ -62,11 +62,11 @@ def callback():
                 print(e)
         print("name_list:")
         print(name_list)
-#         if not name_list:
-#             handler.handle('NG:' + body, signature)
-#         else:
-        strname = ','.join(name_list)
-#             handler.handle('OK:' + strname, signature)
+        if not name_list:
+            handler.handle('NG:' + body, signature)
+        else:
+            strname = ','.join(name_list)
+            handler.handle('OK:' + strname, signature)
     except InvalidSignatureError:
         abort(400)
 
