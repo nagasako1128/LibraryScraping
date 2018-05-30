@@ -62,10 +62,10 @@ def callback():
                 print(e)
         print("name_list:")
         print(name_list)
-        if not name_list:
+#         if not name_list:
 #             handler.handle('NG:' + body, signature)
-        else:
-            strname = ','.join(name_list)
+#         else:
+        strname = ','.join(name_list)
 #             handler.handle('OK:' + strname, signature)
     except InvalidSignatureError:
         abort(400)
