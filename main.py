@@ -40,7 +40,7 @@ def callback():
 
     # get request body as text
 #     body = request.get_data(as_text=True)
-    body = request.get_data()
+    body = request.get_data(as_text=False)
 #     app.logger.info("Request body: " + body)
     print("Request body: " + body)
 
