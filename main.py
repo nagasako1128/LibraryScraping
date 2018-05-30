@@ -36,7 +36,7 @@ url = "https://www.lib100.nexs-service.jp/etajima/webopac/selectsearch.do?search
 @app.route("/callback", methods=['GET'])
 def callback():
     # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
+#     signature = request.headers['X-Line-Signature']
 
     # get request body as text
     body = request.get_data(as_text=True)
@@ -63,10 +63,10 @@ def callback():
         print("name_list:")
         print(name_list)
         if not name_list:
-            handler.handle('NG:' + body, signature)
+#             handler.handle('NG:' + body, signature)
         else:
             strname = ','.join(name_list)
-            handler.handle('OK:' + strname, signature)
+#             handler.handle('OK:' + strname, signature)
     except InvalidSignatureError:
         abort(400)
 
