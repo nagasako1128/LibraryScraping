@@ -49,7 +49,9 @@ def callback():
         print(driver)
 #         driver.find_element_by_css_selector('input#title.iw20').send_keys("孤狼の血")
         driver.find_element_by_css_selector('input#title.iw20').send_keys(body)
+        print(driver)
         driver.find_element_by_css_selector("div.page_content_frame_control button").click()
+        print(driver)
         posts = driver.find_elements_by_css_selector("table#sheet tr td") #ページ内のタイトル複数
         print(posts)
         name_list = []   #初期化
