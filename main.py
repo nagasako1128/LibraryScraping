@@ -39,8 +39,7 @@ def callback():
     signature = request.headers['X-Line-Signature']
 
     # get request body as text
-#     body = request.get_data(as_text=True)
-    body = request.get_data(as_text=False)
+    body = request.get_data(as_text=True)
 #     app.logger.info("Request body: " + body)
     print("Request body: " + body)
 
@@ -48,8 +47,8 @@ def callback():
     try:
         driver.get(url)
         print(driver)
-#         driver.find_element_by_css_selector('input#title.iw20').send_keys("孤狼の血")
-        driver.find_element_by_css_selector('input#title.iw20').send_keys(body)
+        driver.find_element_by_css_selector('input#title.iw20').send_keys("孤狼の血")
+#         driver.find_element_by_css_selector('input#title.iw20').send_keys(body)
         print(driver)
         driver.find_element_by_css_selector("div.page_content_frame_control button").click()
         print(driver)
