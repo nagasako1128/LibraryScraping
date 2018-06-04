@@ -67,7 +67,7 @@ def callback():
         if not name_list:
             handler.handle(body, signature)
         else:
-            strname = ','.join(name_list
+            strname = ','.join(name_list)
 #             TODO
 #             body['events'][0]['message']['text'] = strname
             handler.handle(body, signature)
