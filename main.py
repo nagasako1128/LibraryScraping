@@ -11,7 +11,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
-import os
+import os, json
 
 app = Flask(__name__)
 
@@ -47,8 +47,10 @@ def callback():
     try:
         driver.get(url)
         print(driver)
-        driver.find_element_by_css_selector('input#title.iw20').send_keys("孤狼の血")
-#         driver.find_element_by_css_selector('input#title.iw20').send_keys(body)
+        receive_json = json.loads(body)
+        message = receive_json['events'][0]['message']['text']
+#         driver.find_element_by_css_selector('input#title.iw20').send_keys("孤狼の血")
+        driver.find_element_by_css_selector('input#title.iw20').send_keys(message)
         print(driver)
         driver.find_element_by_css_selector("div.page_content_frame_control button").click()
         print(driver)
@@ -65,8 +67,9 @@ def callback():
         if not name_list:
             handler.handle(body, signature)
         else:
-            strname = ','.join(name_list)
-            body['events'][0]['message']['text'] = strname
+            strname = ','.join(name_list
+#             TODO
+#             body['events'][0]['message']['text'] = strname
             handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
