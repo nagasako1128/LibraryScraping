@@ -79,7 +79,8 @@ def callback():
                     'message': {
                         'type': 'text',
                         'id': receive_json['events'][0]['message']['id'],
-                        'text': '図書館にそんな本ねーよ！アマゾンで買え！https://www.amazon.co.jp/s/ref=nb_sb_noss_1/358-0096124-2258834?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&url=search-alias%3Daps&field-keywords=' + line_input_message
+                        'text': 'ありません！'
+                        # '図書館にそんな本ねーよ！アマゾンで買え！https://www.amazon.co.jp/s/ref=nb_sb_noss_1/358-0096124-2258834?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&url=search-alias%3Daps&field-keywords=' + line_input_message
                     }
                 }]
             }
@@ -87,7 +88,7 @@ def callback():
             str_post_data = json.dumps(json_post_data)
             print(str_post_data)
             print(type(str_post_data))
-            handler.handle(json_post_data, signature)
+            handler.handle(str_post_data, signature)
         else:
             strname = ','.join(name_list)
 #             TODO
