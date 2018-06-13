@@ -67,7 +67,7 @@ def callback():
         if not name_list:
             # 送信データ作成
             json_post_data = {
-                'replyToken': receive_json['events'][0]['message']['replyToken'],
+                'replyToken': receive_json['events'][0]['replyToken'],
                 "messages": [{
                     'type': 'text',
                     'text': '図書館にそんな本ねーよ！アマゾンで買え！https://www.amazon.co.jp/s/ref=nb_sb_noss_1/358-0096124-2258834?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&url=search-alias%3Daps&field-keywords=' + line_input_message
