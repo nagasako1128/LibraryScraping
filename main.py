@@ -73,6 +73,7 @@ def callback():
                     'text': '図書館にそんな本ねーよ！アマゾンで買え！https://www.amazon.co.jp/s/ref=nb_sb_noss_1/358-0096124-2258834?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&url=search-alias%3Daps&field-keywords=' + line_input_message
                 }]
             }
+            print(json_post_data)
             handler.handle(json_post_data, signature)
         else:
             strname = ','.join(name_list)
