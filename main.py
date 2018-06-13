@@ -66,7 +66,7 @@ def callback():
         print(name_list)
         if not name_list:
             # 送信データ作成
-            json_post_data = {
+            post_data = {
                 'events': [{
                     'type': 'message',
                     'replyToken': receive_json['events'][0]['replyToken'],
@@ -82,9 +82,10 @@ def callback():
                     }
                 }]
             }
+            json_post_data = json.load(post_data)
             str_post_data = json.dumps(json_post_data)
             print(str_post_data)
-            handler.handle(str_post_data, signature)
+            handler.handle(json_post_data, signature)
         else:
             strname = ','.join(name_list)
 #             TODO
