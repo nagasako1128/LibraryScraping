@@ -42,6 +42,7 @@ def callback():
     body = request.get_data(as_text=True)
 #     app.logger.info("Request body: " + body)
     print(body)
+    print(type(body))
 
     # handle webhook body
     try:
@@ -66,7 +67,7 @@ def callback():
         print(name_list)
         if not name_list:
             # 送信データ作成
-            post_data = {
+            json_post_data = {
                 'events': [{
                     'type': 'message',
                     'replyToken': receive_json['events'][0]['replyToken'],
@@ -82,9 +83,10 @@ def callback():
                     }
                 }]
             }
-            json_post_data = json.loads(post_data)
+            print(type(json_post_data))
             str_post_data = json.dumps(json_post_data)
             print(str_post_data)
+            print(type(str_post_data))
             handler.handle(json_post_data, signature)
         else:
             strname = ','.join(name_list)
