@@ -82,7 +82,7 @@ def callback():
                     }
                 }]
             }
-            json_post_data = json.load(post_data)
+            json_post_data = json.loads(post_data)
             str_post_data = json.dumps(json_post_data)
             print(str_post_data)
             handler.handle(json_post_data, signature)
