@@ -48,15 +48,15 @@ def callback():
         driver.get(url)
         print(driver)
         receive_json = json.loads(body)
-        message = receive_json['events'][0]['message']['text']
+        line_input_message = receive_json['events'][0]['message']['text']
 #         driver.find_element_by_css_selector('input#title.iw20').send_keys("孤狼の血")
-        driver.find_element_by_css_selector('input#title.iw20').send_keys(message)
+        driver.find_element_by_css_selector('input#title.iw20').send_keys(line_input_message)
         print(driver)
         driver.find_element_by_css_selector("div.page_content_frame_control button").click()
         print(driver)
         posts = driver.find_elements_by_css_selector("table#sheet tr td") #ページ内のタイトル複数
         print(posts)
-        name_list = []   #初期化
+        name_list = []   # 初期化
         for post in posts:
             try:
                 name_list.append(post.text)
@@ -65,7 +65,15 @@ def callback():
         print("name_list:")
         print(name_list)
         if not name_list:
-            handler.handle(body, signature)
+            # 送信データ作成
+            json_post_data = {
+                'replyToken': receive_json['events'][0]['message']['replyToken'],
+                "messages": [{
+                    'type': 'text',
+                    'text': '図書館にそんな本ねーよ！アマゾンで買え！https://www.amazon.co.jp/s/ref=nb_sb_noss_1/358-0096124-2258834?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&url=search-alias%3Daps&field-keywords=' + line_input_message
+                }]
+            }
+            handler.handle(json_post_data, signature)
         else:
             strname = ','.join(name_list)
 #             TODO
