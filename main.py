@@ -41,7 +41,7 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
 #     app.logger.info("Request body: " + body)
-    print("Request body: " + body)
+    print(body)
 
     # handle webhook body
     try:
@@ -84,7 +84,7 @@ def callback():
             }
             str_post_data = json.dumps(json_post_data)
             print(str_post_data)
-            handler.handle(json_post_data, signature)
+            handler.handle(str_post_data, signature)
         else:
             strname = ','.join(name_list)
 #             TODO
