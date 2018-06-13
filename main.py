@@ -74,7 +74,7 @@ def callback():
                 }]
             }
             str_post_data = json.dumps(json_post_data)
-            print(str_post_data))
+            print(str_post_data)
             handler.handle(str_post_data, signature)
         else:
             strname = ','.join(name_list)
